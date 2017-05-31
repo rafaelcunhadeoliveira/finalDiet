@@ -92,29 +92,6 @@ class NewItemViewController: UIViewController {
         if(checkValues()){
             
             self.saveItem()
-            /*
-             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-             
-             let context = appDelegate.persistentContainer.viewContext
-             
-             let new_Measure = NSEntityDescription.insertNewObject(forEntityName: "Itens", into: context)
-             
-             new_Measure.setValue("rafael", forKey: "user")
-             new_Measure.setValue(itemName, forKey: "name")
-             new_Measure.setValue(itemQuantity, forKey: "quantity")
-             new_Measure.setValue(itemUnity, forKey: "unity")
-             new_Measure.setValue(actualMeal.id, forKey: "id")
-             
-             do{
-             try context.save()
-             print("The user is saved")
-             
-             }
-             catch{
-             //error
-             }
-             */
-            
             performSegue(withIdentifier: "saveItem", sender: self)
         }
         else{
@@ -153,5 +130,10 @@ class NewItemViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    @IBAction func backButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "allItens") as UIViewController
+        present(vc, animated: true, completion: nil)
+    }
 
 }

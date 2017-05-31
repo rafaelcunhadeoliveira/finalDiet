@@ -20,6 +20,7 @@ class MealTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var plusButton: UIBarButtonItem!
+    @IBOutlet weak var backButton: UIBarButtonItem!
     
     var actualhour: Int = 0
     var actualminute: Int = 0
@@ -36,14 +37,7 @@ class MealTableViewController: UIViewController, UITableViewDelegate, UITableVie
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        if(isNew){
-            
-            self.plusButton.title = "Done"
-            self.plusButton.action = #selector(MealItensTableViewController.Done)
-        }
-        else{
-            self.plusButton.action = #selector(MealTableViewController.insert)
-        }
+        setButtons()
         
         let getResults = self.getMeals()
         for result in getResults.enumerated() {
@@ -64,7 +58,22 @@ class MealTableViewController: UIViewController, UITableViewDelegate, UITableVie
         actualminute = components.minute!
     }
     
-    //------------------------------- Segue ----------------------------
+    
+    //------------------------------- Navigation ----------------------------
+    
+    func setButtons(){
+        
+        if isNew {
+            self.backButton.title = "Done"
+            self.backButton.action = #selector(self.Done)
+        }
+        else{
+            self.backButton.action = #selector(self.backToAllMenu)
+        }
+      
+        self.plusButton.action = #selector(self.insert)
+        
+    }
     
     func insert(){
         performSegue(withIdentifier: "newMeal", sender: self)
@@ -72,7 +81,16 @@ class MealTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func Done(){
         performSegue(withIdentifier: "backToMenus", sender: self)
-        
+    }
+    func backToNew(){
+        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "newMenu") as UIViewController
+        present(vc, animated: true, completion: nil)
+    }
+    func backToAllMenu(){
+        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "allMenus") as UIViewController
+        present(vc, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -81,7 +99,7 @@ class MealTableViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         if let destination = segue.destination as? MenuTableViewController{
             destination.actualMenu = self.actualMenu
-            destination.isNew = true
+            destination.isDone = true
         }
         if let destination = segue.destination as? MealItensTableViewController{
             destination.actualMeal = self.actualMeal

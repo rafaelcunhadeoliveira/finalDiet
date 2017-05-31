@@ -15,7 +15,7 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
     var allMenus: Array<Menu> = []
     var allMenusRealm: Array<MenuRealm> = []
     var actualMenu: Menu = Menu(year: 0, month: 0, day: 0, calories: 0, id: "")
-    var isNew: Bool = false
+    var isDone: Bool = false
     var year: Int = 0
     var month: Int = 0
     var day: Int = 0
@@ -33,7 +33,7 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        if(isNew){
+        if(isDone){
             
             self.plusButton.title = "Done"
             self.plusButton.action = #selector(MealItensTableViewController.Done)
@@ -48,57 +48,6 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
             allMenusRealm.append(result.element)
             allMenus.append(self.changeMenuType(result: result.element))
         }
-        
-        /*let appDelegate = UIApplication.shared.delegate as! AppDelegate
-         
-         let context = appDelegate.persistentContainer.viewContext
-         
-         
-         do{
-         
-         let requestItem = NSFetchRequest<NSFetchRequestResult>(entityName: "Menus")
-         requestItem.returnsObjectsAsFaults = false
-         
-         let resultsItem = try context.fetch(requestItem)
-         if resultsItem.count > 0{
-         for resultI in resultsItem as! [NSManagedObject]{
-         
-         if let user = resultI.value(forKey: "user"){
-         let userMenu =  String(describing: user)
-         
-         if ("rafael" == userMenu) {
-         if let menuYear = resultI.value(forKey: "year") {
-         let temp =  String(describing: menuYear)
-         year = Int(temp)!
-         }
-         if let menuMonth = resultI.value(forKey: "month") {
-         let temp =  String(describing: menuMonth)
-         month = Int(temp)!
-         }
-         if let menuDay = resultI.value(forKey: "day") {
-         let temp =  String(describing: menuDay)
-         day = Int(temp)!
-         }
-         if let menuID = resultI.value(forKey: "id"){
-         id =  String(describing: menuID)
-         }
-         if let menuCalories = resultI.value(forKey: "totalCalories") {
-         let temp =  String(describing: menuCalories)
-         calories = Float(temp)!
-         }
-         
-         let actualMenu: Menu = Menu(year: year, month: month, day: day, calories: calories, id: id)
-         allMenus.insert(actualMenu, at: 0)
-         }
-         }
-         }
-         }
-         
-         }
-         catch{
-         //error
-         }*/
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,7 +87,7 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.actualMenu = allMenus[indexPath.row]
-        self.isNew = false
+        self.isDone = false
         self.performSegue(withIdentifier: "individualMenu", sender: indexPath.row)
     }
     
@@ -170,7 +119,14 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    //------------------------------- Segue ---------------------------------
+    //------------------------------- Navigation ---------------------------------
+    
+    @IBAction func backButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "Home") as UIViewController
+        present(vc, animated: true, completion: nil)
+    }
+    
     
     func insert(){
         performSegue(withIdentifier: "newMenu", sender: self)

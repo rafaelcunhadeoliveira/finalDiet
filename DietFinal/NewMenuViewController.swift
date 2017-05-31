@@ -54,6 +54,11 @@ class NewMenuViewController: UIViewController {
         day = calendar.component(.day, from: date)
     }
     
+    @IBAction func backButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "allMenus") as UIViewController
+        present(vc, animated: true, completion: nil)
+    }
     
     @IBAction func nextButton(_ sender: Any) {
         let menuID = String(self.year) + String(self.month) + String(self.day)
@@ -70,6 +75,7 @@ class NewMenuViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? MealTableViewController{
             destination.actualMenu = self.actualMenu
+            destination.isNew = true
         }
     }
     //---------------------------Logic------------------------------

@@ -82,6 +82,12 @@ class NewMealViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
     }
     
+    @IBAction func backButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "allMeals") as UIViewController
+        present(vc, animated: true, completion: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? MealItensTableViewController{
             destination.actualMeal = self.actualMeal
