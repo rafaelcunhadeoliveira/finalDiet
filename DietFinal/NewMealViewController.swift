@@ -94,6 +94,10 @@ class NewMealViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             destination.newItem = true
             destination.actualMenu = self.actualMenu
         }
+        if let destination = segue.destination as? MealTableViewController{
+            destination.getID = self.actualMeal
+            destination.actualMenu = self.actualMenu
+        }
     }
     
     func saveMealRealm(){

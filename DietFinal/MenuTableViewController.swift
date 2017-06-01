@@ -70,6 +70,7 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         cell.monthLabel.text = monthName
         cell.yearLabel.text = String(allMenus[indexPath.row].year)
+        cell.dayLabel.text = String(allMenus[indexPath.row].day)
         return cell
     }
     
@@ -131,7 +132,9 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func Done(){
-        performSegue(withIdentifier: "backHome", sender: self)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "Home") as UIViewController
+        present(vc, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

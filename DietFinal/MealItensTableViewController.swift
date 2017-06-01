@@ -29,12 +29,8 @@ class MealItensTableViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var plusButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(MealItensTableViewController.insert))
-        if(newItem){
-  
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(MealItensTableViewController.Done))
-        }
-        
+        setButtons()
+
         itemID = actualMenu.id + "/" + String(actualMeal.hour) + String(actualMeal.minute) + actualMeal.type
         
         let getResults = self.getItens()
@@ -49,11 +45,9 @@ class MealItensTableViewController: UIViewController, UITableViewDelegate, UITab
     func setButtons(){
         if(newItem){
             self.backButton.title = "Done"
-            self.backButton.action = #selector(MealItensTableViewController.Done)
+            
         }
-        else{
-            self.backButton.action = #selector(self.backAction)
-        }
+        self.backButton.action = #selector(self.Done)
         self.plusButton.action = #selector(self.insert)
     }
     
@@ -66,7 +60,7 @@ class MealItensTableViewController: UIViewController, UITableViewDelegate, UITab
     }
     func backAction() {
         let storyboard = UIStoryboard(name: "Menu", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "AllMeals") as UIViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "allMeals") as UIViewController
         present(vc, animated: true, completion: nil)
     }
     
@@ -78,7 +72,7 @@ class MealItensTableViewController: UIViewController, UITableViewDelegate, UITab
         if let destination = segue.destination as? MealTableViewController{
             destination.getID = self.actualMeal
             destination.actualMenu = self.actualMenu
-            destination.isNew = true
+            destination.isNew = newItem
         }
     }
     override func didReceiveMemoryWarning() {

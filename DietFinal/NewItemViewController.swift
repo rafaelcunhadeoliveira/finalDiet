@@ -105,6 +105,7 @@ class NewItemViewController: UIViewController {
             destination.newItem = true
             destination.actualMenu = self.actualMenu
         }
+
     }
     
     func saveItem(){
