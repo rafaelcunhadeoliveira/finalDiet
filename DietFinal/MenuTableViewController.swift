@@ -15,7 +15,7 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
     var allMenus: Array<Menu> = []
     var allMenusRealm: Array<MenuRealm> = []
     var actualMenu: Menu = Menu(year: 0, month: 0, day: 0, calories: 0, id: "")
-    var isDone: Bool = false
+    var isNew: Bool = false
     var year: Int = 0
     var month: Int = 0
     var day: Int = 0
@@ -25,24 +25,12 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var plusButton: UIBarButtonItem!
 
+    @IBOutlet weak var backButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        if(isDone){
-            
-            self.plusButton.title = "Done"
-            self.plusButton.action = #selector(MealItensTableViewController.Done)
-        }
-        else{
-            self.plusButton.action = #selector(MenuTableViewController.insert)
-        }
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(MenuTableViewController.insert))
-        
+        setButtons()
         let getResults = self.getMenus()
         for result in getResults.enumerated() {
             allMenusRealm.append(result.element)
@@ -87,7 +75,7 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.actualMenu = allMenus[indexPath.row]
-        self.isDone = false
+        self.isNew = false
         self.performSegue(withIdentifier: "individualMenu", sender: indexPath.row)
     }
     
@@ -121,10 +109,20 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     //------------------------------- Navigation ---------------------------------
     
-    @IBAction func backButton(_ sender: Any) {
+    func backAction() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "Home") as UIViewController
         present(vc, animated: true, completion: nil)
+    }
+    func setButtons(){
+        if(isNew){
+            self.backButton.title = "Done"
+            self.backButton.action = #selector(MealItensTableViewController.Done)
+        }
+        else{
+            self.backButton.action = #selector(self.backAction)
+        }
+        self.plusButton.action = #selector(self.insert)
     }
     
     

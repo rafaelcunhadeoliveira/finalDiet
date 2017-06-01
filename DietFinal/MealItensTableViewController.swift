@@ -24,7 +24,9 @@ class MealItensTableViewController: UIViewController, UITableViewDelegate, UITab
     var newItem = false
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var backButton: UIBarButtonItem!
     
+    @IBOutlet weak var plusButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(MealItensTableViewController.insert))
@@ -42,52 +44,17 @@ class MealItensTableViewController: UIViewController, UITableViewDelegate, UITab
                 items.append(self.changeItensType(result: result.element))
             }
         }
-        
-        /*
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        let context = appDelegate.persistentContainer.viewContext
-        
-        
-        do{
-            
-            let requestItem = NSFetchRequest<NSFetchRequestResult>(entityName: "Itens")
-            requestItem.returnsObjectsAsFaults = false
-            
-            let resultsItem = try context.fetch(requestItem)
-            if resultsItem.count > 0{
-                for resultI in resultsItem as! [NSManagedObject]{
-                    
-                    if let id = resultI.value(forKey: "id"){
-                        itemID =  String(describing: id)
-                        if (itemID == actualMeal.id) {
-                            if let name = resultI.value(forKey: "name") {
-                                itemName =  String(describing: name)
-                            }
-                            if let quantity = resultI.value(forKey: "quantity") {
-                                itemQuantity =  String(describing: quantity)
-                            }
-                            if let unity = resultI.value(forKey: "unity"){
-                                itemUnity =  String(describing: unity)
-                            }
-                            items.append((itemName, itemQuantity, itemUnity))
-                        }
-                    }
-                }
-            }
-            
+    }
+    
+    func setButtons(){
+        if(newItem){
+            self.backButton.title = "Done"
+            self.backButton.action = #selector(MealItensTableViewController.Done)
         }
-        catch{
-            //error
+        else{
+            self.backButton.action = #selector(self.backAction)
         }
-        
-        */
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.plusButton.action = #selector(self.insert)
     }
     
     func insert(){
@@ -96,6 +63,11 @@ class MealItensTableViewController: UIViewController, UITableViewDelegate, UITab
     
     func Done(){
         performSegue(withIdentifier: "isDone", sender: self)
+    }
+    func backAction() {
+        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AllMeals") as UIViewController
+        present(vc, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -154,34 +126,7 @@ class MealItensTableViewController: UIViewController, UITableViewDelegate, UITab
      func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete
         {
-            /*let moc = getContext()
-            var count = 0
-            do{
-                
-                let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Itens")
-                request.returnsObjectsAsFaults = false
-                
-                let results = try moc.fetch(request)
-                if results.count > 0{
-                    for result in results as! [NSManagedObject]{
-                        if(count == indexPath.row){
-                            moc.delete(result)
-                        }
-                        count += 1
-                    }
-                }
-            }
-            catch{}
             
-            do {
-                try moc.save()
-                print("saved!")
-            } catch let error as NSError  {
-                print("Could not save \(error), \(error.userInfo)")
-            } catch {
-                
-            }
-            */
             self.itemsRealm[indexPath.row].delete()
             self.itemsRealm.remove(at: indexPath.row)
             self.items.remove(at: indexPath.row)

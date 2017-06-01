@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eW6-ZF-4e4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eW6-ZF-4e4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,9 +31,6 @@
                                     <navigationItem title="Menu" id="dbZ-09-ZdC">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="bzF-KW-DUi">
                                             <color key="tintColor" red="0.36319288611412048" green="0.72744852304458618" blue="0.3666844367980957" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <action selector="backButton:" destination="eW6-ZF-4e4" id="9TX-lz-Ro7"/>
-                                            </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="+" id="hHg-Js-8Br">
                                             <color key="tintColor" red="0.36319288611412048" green="0.72744852304458618" blue="0.3666844367980957" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -49,7 +46,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c2w-de-uTv" id="zLD-Rr-era">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Op-hc-bEt">
@@ -115,6 +112,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="bzF-KW-DUi" id="y25-4A-Gdd"/>
                         <outlet property="plusButton" destination="hHg-Js-8Br" id="iwc-gg-UgT"/>
                         <outlet property="tableView" destination="yHz-qX-iNc" id="edn-hZ-0Pn"/>
                         <segue destination="c5x-Yl-H0H" kind="show" identifier="newMenu" id="1hB-Yh-Vqi"/>
@@ -214,7 +212,7 @@
         <!--Meal Table View Controller-->
         <scene sceneID="6Sl-FX-DW8">
             <objects>
-                <viewController storyboardIdentifier="AllMeals" id="lFs-KW-AmZ" customClass="MealTableViewController" customModule="DietFinal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="allMeals" id="lFs-KW-AmZ" customClass="MealTableViewController" customModule="DietFinal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="P2J-CI-qgI"/>
                         <viewControllerLayoutGuide type="bottom" id="gVP-eO-HBr"/>
@@ -247,7 +245,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="147"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3KJ-tC-EMo" id="PDF-s1-KGc">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="147"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="146"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="G3N-Ef-QX6">
@@ -353,7 +351,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="102"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FJh-s8-8f5" id="Vxg-i4-jhp">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="102"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="101"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9le-Oj-JzK">
@@ -422,6 +420,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="Tnb-hi-BfH" id="9RT-4i-56n"/>
+                        <outlet property="plusButton" destination="oiz-uj-Vir" id="vJP-9s-KI4"/>
                         <outlet property="tableView" destination="HKi-TN-Jr8" id="WLN-Ks-nym"/>
                         <segue destination="lFs-KW-AmZ" kind="show" identifier="isDone" id="XeW-x4-nL3"/>
                     </connections>

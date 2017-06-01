@@ -82,11 +82,7 @@ class MealTableViewController: UIViewController, UITableViewDelegate, UITableVie
     func Done(){
         performSegue(withIdentifier: "backToMenus", sender: self)
     }
-    func backToNew(){
-        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "newMenu") as UIViewController
-        present(vc, animated: true, completion: nil)
-    }
+
     func backToAllMenu(){
         let storyboard = UIStoryboard(name: "Menu", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "allMenus") as UIViewController
@@ -99,7 +95,7 @@ class MealTableViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         if let destination = segue.destination as? MenuTableViewController{
             destination.actualMenu = self.actualMenu
-            destination.isDone = true
+            destination.isNew = true
         }
         if let destination = segue.destination as? MealItensTableViewController{
             destination.actualMeal = self.actualMeal
