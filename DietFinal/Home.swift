@@ -10,11 +10,14 @@ import UIKit
 
 class Home: UIViewController {
 
+    @IBOutlet weak var measureButton: UIButton!
+    @IBOutlet weak var menuButton: UIButton!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        measureButton.adjustsImageWhenHighlighted = false
+        menuButton.adjustsImageWhenHighlighted = false
         // Do any additional setup after loading the view.
     }
 
